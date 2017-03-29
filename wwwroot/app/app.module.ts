@@ -34,11 +34,12 @@ import { AuthHttp } from "./auth.http";
         AppRouting
     ],
     providers: [
+        AuthHttp,
         AuthService
     ],
     bootstrap: [
         AppComponent,
-        AuthHttp
+        
     ],
 })
 export class AppModule { }
