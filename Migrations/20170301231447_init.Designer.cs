@@ -8,7 +8,7 @@ using FisherInsuranceApi.Data;
 namespace FisherInsuranceApi.Migrations
 {
     [DbContext(typeof(FisherContext))]
-    [Migration("20170301231447_init")]
+    [Migration("20170301211500_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

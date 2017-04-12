@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../auth.service';
+import { Router } from '@angular/router'; 
+
+import { AuthService } from '../../auth.service'; 
 
 @Component({
     selector: 'login',
@@ -12,6 +13,7 @@ export class LoginComponent {
     title = "Login";
     loginForm = null;
     loginError = false;
+
     constructor(
         private fb: FormBuilder,
         private router: Router,

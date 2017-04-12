@@ -1,13 +1,21 @@
 .login-container {
- max-width: 330px;
- padding: 15px;
+    max-width: 330px;
+    padding: 15px;
+ 
 }
-/*.login-container.form{
- margin: 0 0 10px 20px;
-}
-{
- margin-bottom: 10px;
-}
-input {
- margin-bottom: 10px;
-}*/
+
+/*
+.login-container { 
+    max-width: 330px; 
+    padding: 15px; 
+    .form-login { 
+        margin: 0 0 10px 20px; 
+        .checkbox { 
+            margin-bottom: 10px; 
+        } 
+        input { 
+            margin-bottom: 10px; 
+        } 
+    } 
+} 
+*/

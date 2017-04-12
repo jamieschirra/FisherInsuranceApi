@@ -8,7 +8,7 @@ using FisherInsuranceApi.Data;
 namespace FisherInsuranceApi.Migrations
 {
     [DbContext(typeof(FisherContext))]
-    [Migration("20170322225717_identity")]
+    [Migration("20170329021127_identity")]
     partial class identity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,3 +1,4 @@
+
 {
   "iisSettings": {
     "windowsAuthentication": false,
@@ -19,7 +20,7 @@
     "FisherInsuranceApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5000",
+      "launchUrl": "http://localhost:5000/api/values",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

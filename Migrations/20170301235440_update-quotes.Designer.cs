@@ -8,7 +8,7 @@ using FisherInsuranceApi.Data;
 namespace FisherInsuranceApi.Migrations
 {
     [DbContext(typeof(FisherContext))]
-    [Migration("20170301235440_update-quotes")]
+    [Migration("20170301211943_update-quotes")]
     partial class updatequotes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

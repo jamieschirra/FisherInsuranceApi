@@ -1,60 +1,86 @@
-
 using FisherInsuranceApi.Data;
 using FisherInsuranceApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-[Route("api/claims")]
-public class ClaimsController : Controller
+namespace FisherInsuranceApi.Controllers
 {
-    private readonly FisherContext db;
-    public ClaimsController(FisherContext context)
+    [RouteAttribute("api/claims")]
+    public class ClaimsController : Controller
     {
-        db = context;
-    }
 
-    [HttpGet]
-    public IActionResult GetClaims()
-    {
-        return Ok(db.Claims);
-    }
+        private readonly FisherContext db;
 
-    [HttpGet("{id}", Name = "GetClaim")]
-    public IActionResult Get(int id)
-    {
-        return Ok(db.Claims.Find(id));
-    }
-
-    [HttpPost]
-    public IActionResult Post([FromBody] Claim claim)
-    {
-        var newClaim = db.Claims.Add(claim);
-        db.SaveChanges();
-        return CreatedAtRoute("GetClaim", new { id = claim.Id }, claim);
-    }
-
-    [HttpPut("{id}")]
-    public IActionResult Put(int id, [FromBody] Claim claim)
-    {
-        var newClaim = db.Claims.Find(id);
-        if (newClaim == null)
+        public ClaimsController(FisherContext context)
         {
-            return NotFound();
+            db = context;
         }
-        newClaim = claim;
-        db.SaveChanges();
-        return Ok(newClaim);
-    }
 
-    [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
-    {
-        var claimToDelete = db.Claims.Find(id);
-        if (claimToDelete == null)
+        [HttpGet]
+        public IActionResult GetClaims()
         {
-            return NotFound();
+            return Ok(db.Claims);
+
         }
-        db.Claims.Remove(claimToDelete);
-        db.SaveChangesAsync();
-        return NoContent();
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Post([FromBody] Claim claim)
+        {
+            var newClaim = db.Claims.Add(claim);
+            db.SaveChanges();
+
+            return CreatedAtRoute("GetClaim", new { id = claim.Id }, claim);
+        }
+
+
+        [HttpGet("{id}", Name = "GetClaim")]
+        public IActionResult Get(int id)
+        {
+            return Ok(db.Claims.Find(id));
+        }
+
+
+        [HttpPut("{id}")]
+        [Authorize]
+        public IActionResult Put(int id, [FromBody] Claim newClaim)
+        {
+            var claim = db.Claims.Find(id);
+            if (claim == null)
+            {
+                return NotFound();
+            }
+
+            claim = newClaim;
+            claim.Id = id;
+
+            db.Update(claim);
+            db.SaveChanges();
+
+            return Ok(claim);
+        }
+
+
+        [HttpDelete("{id}")]
+        [Authorize]
+        public IActionResult Delete(int id)
+        {
+            if (!User.IsInRole("Administrators"))
+            {
+                return Unauthorized();
+            }
+
+            var claimToDelete = db.Claims.Find(id);
+            if (claimToDelete == null)
+            {
+                return NotFound();
+            }
+
+            db.Claims.Remove(claimToDelete);
+            db.SaveChangesAsync();
+
+            return NoContent();
+
+        }
     }
 }
